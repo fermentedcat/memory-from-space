@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Image } from './models/image'
+
+const IMAGE_AMOUNT = 6
+const API_KEY = process.env.REACT_APP_API_KEY as string
+const API_URL = `https://api.nasa.gov/planetary/apod?count=${IMAGE_AMOUNT}&api_key=${API_KEY}`
 
 function App() {
+  const [images, setImages] = useState<Image[]>([]);
+  
+  useEffect(() => {
+    axios.get<Image[]>(API_URL)
+      .then(res => {
+        if (res.statusText !== 'OK') {
+          throw new Error('Failed to fetch images!')
+        }
+        setImages(res.data)
+      })
+      .catch(err => {
+        alert(err.message)
+      })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* click button to play // load images */}
+      {images.map(image => (
+        <p key={image.title}>{image.title}</p>
+      ))}
     </div>
   );
 }
