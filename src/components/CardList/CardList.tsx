@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styles from './CardList.module.scss'
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { GameContext } from '../../context/GameContext'
+import { GameContextInterface } from '../../models/game-state'
+
 import { Image } from '../../models/image'
 import { Card } from '../Card/Card'
 import { shuffle } from 'lodash'
 import { MemoryCard } from '../../models/memory-card'
+import styles from './CardList.module.scss'
 
 interface CardListProps {
   images: Image[]
@@ -12,6 +15,7 @@ interface CardListProps {
 export const CardList: React.FC<CardListProps> = ({ images }) => {
   const [cards, setCards] = useState<MemoryCard[]>([])
   const [isFlippingBack, setIsFlippingBack] = useState<boolean>(false)
+  const { addAttempt, setStatus } = useContext(GameContext) as GameContextInterface
   const timer = useRef<NodeJS.Timer>()
   
   useEffect(() => {
@@ -38,9 +42,11 @@ export const CardList: React.FC<CardListProps> = ({ images }) => {
     
     // check for matched cards
     if (checkIsMatchable(index, prevFlippedIndex)) {
+      addAttempt()
       const isMatch = checkIsMatch(index, prevFlippedIndex)
 
       if (isMatch) {
+        checkIsFinished()
         setMatchedCards(index, prevFlippedIndex)
         unFlipCards()
         return
@@ -67,6 +73,12 @@ export const CardList: React.FC<CardListProps> = ({ images }) => {
 
   function checkIsMatch(index1: number, index2: number) {
     return cards[index1].url === cards[index2].url
+  }
+
+  function checkIsFinished() {
+    // state will not have updated upon call from new match
+    const isFinished = cards.filter(card => !card.isMatched).length <= 2
+    isFinished && setStatus(isFinished)
   }
 
   function setMatchedCards(index1: number, index2: number) {
