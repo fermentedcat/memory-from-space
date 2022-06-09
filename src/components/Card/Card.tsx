@@ -1,16 +1,18 @@
 import React from 'react'
-import { Image } from '../../models/image'
+import { MemoryCard } from '../../models/memory-card'
 import styles from './Card.module.scss'
 
 interface CardProps {
-  image: Image
+  card: MemoryCard
+  onFlip: () => void
 }
 
-export const Card: React.FC<CardProps> = ({ image }) => {
+export const Card: React.FC<CardProps> = ({ card, onFlip }) => {
   return (
     <button 
-      title={image.title}
-      style={{ backgroundImage: `url(${image.url})`}} 
+      onClick={onFlip}
+      title={card.title}
+      style={{ backgroundImage: card.isFlipped || card.isMatched ? `url(${card.url})` : 'none'}} 
       className={styles.wrapper}>
       {/* {image.title} */}
     </button>
