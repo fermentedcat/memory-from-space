@@ -1,10 +1,38 @@
 .wrapper {
-  box-sizing: border-box;
-  padding: 0.5em;
-  border-radius: 3px;
-  background-color: rgb(255, 215, 215);
-  height: 100%;
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
+  position: relative;
+  background-color: transparent;
+  border: none;
+  filter: drop-shadow(1px 3px 2.5px rgba(0, 0, 0, 0.274));
+
+  &:focus-visible {
+    border-radius: 5px;
+    outline: 6px solid rgb(56, 148, 246);
+  }
+
+  .front,
+  .back {
+    overflow: hidden;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    .inner {
+      height: 100%;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
+  .back {
+    background-color: rgb(240, 235, 219);
+    outline: 1px solid rgb(240, 235, 219);
+    padding: 0.4em;
+    .inner {
+      border-radius: 3px;
+      background-image: url('https://i.pinimg.com/originals/6c/75/cf/6c75cfba8729aa224280bd997c1e443f.jpg');
+      background-size: 120%;
+    }
+  }
 }
