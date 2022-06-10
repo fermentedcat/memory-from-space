@@ -114,7 +114,7 @@ export const CardList: React.FC<CardListProps> = ({ images }) => {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       {cards.map((card, index) => (
         <Card 
           key={index} 
@@ -122,6 +122,6 @@ export const CardList: React.FC<CardListProps> = ({ images }) => {
           onFlip={cardFlipHandler.bind(null, index)}
         />
       ))}
-    </div>
+    </section>
   )
 }
