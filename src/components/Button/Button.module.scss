@@ -1,0 +1,56 @@
+.button {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 1em;
+  border-radius: 3px;
+  border: none;
+  width: 100%;
+  transition: all 0.06s ease-in-out;
+
+  &.confirm {
+    background-color: rgb(221, 232, 206);
+    filter: drop-shadow(-2px 4px 0px rgb(170, 190, 146));
+
+    &:hover:not(:active) {
+      background-color: rgb(231, 237, 218);
+    }
+    &:active {
+      background-color: rgb(240, 245, 231);
+      filter: drop-shadow(-2px 4px 0px rgb(190, 210, 169));
+    }
+  }
+
+  &.cancel {
+    background-color: rgb(243, 215, 208);
+    filter: drop-shadow(-2px 4px 0px rgb(208, 168, 158));
+    &:hover {
+      background-color: rgb(245, 225, 219);
+    }
+    &:active {
+      background-color: rgb(251, 235, 229);
+      filter: drop-shadow(-2px 4px 0px rgb(219, 193, 185));
+    }
+  }
+
+  &.icon {
+    display: flex;
+    border-radius: 100px;
+    background-color: rgb(221, 232, 206);
+    filter: drop-shadow(-2px 4px 0px rgb(170, 190, 146));
+    &:hover:not(:active) {
+      background-color: rgb(231, 237, 218);
+    }
+    &:active {
+      background-color: rgb(240, 245, 231);
+      filter: drop-shadow(-2px 4px 0px rgb(190, 210, 169));
+    }
+
+    svg {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.button + .button {
+  margin-left: 1em;
+}
