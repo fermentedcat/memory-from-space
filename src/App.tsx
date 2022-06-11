@@ -80,10 +80,11 @@ function App() {
         <Modal
           heading="You did it!"
           body={[`You finished the game in ${attempts} attempts.`, 'Try again?']}
-          cta={[
-            <Button text="Start new game" variant="confirm" onClick={handleStartGame}/>,
-            <Button text="Cancel" variant="cancel" onClick={handleCloseModal}/>
-          ]}
+          cta={{
+            text: "Start new game",
+            onClick: handleStartGame
+          }}
+          onClose={handleCloseModal}
         />
       )}
     </main>

@@ -3,7 +3,6 @@ import styles from './Button.module.scss'
 
 type ButtonVariantType = 'cancel' | 'close' | 'confirm' | 'icon'
 
-
 type ButtonProps = {
   text?: string
   ariaLabel?: string

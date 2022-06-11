@@ -5,8 +5,11 @@ import styles from './Modal.module.scss'
 interface ModalProps {
   heading?: string
   body?: string[]
-  cta?: React.ReactElement[]
-  onClose?: () => void
+  cta?: {
+    text: string,
+    onClick: () => void
+  }
+  onClose: () => void
   children?: React.ReactElement[]
 }
 
@@ -29,16 +32,10 @@ export const Modal: React.FC<ModalProps> = ({
           })}
           {children && children}
         </div>
-        {cta && (
-          <div className={styles.actions}>
-            {cta}
-          </div>
-        )}
-        {onClose && (
-          <div className={styles.actions}>
-            <Button text="Close" variant="confirm" onClick={onClose} />
-          </div>
-        )}
+        <div className={styles.actions}>
+          {cta && <Button text={cta.text} variant="confirm" onClick={cta.onClick} />}
+          <Button text="Close" variant={cta ? "cancel" : "confirm"} onClick={onClose} />
+        </div>
       </aside>
     </div>
     </>
