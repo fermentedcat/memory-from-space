@@ -40,8 +40,8 @@ export const CardList: React.FC<CardListProps> = ({ images }) => {
     // flip clicked card
     flipCard(index)
     
-    // check for matched cards
-    if (checkIsMatchable(index, prevFlippedIndex)) {
+    // check for matched cards if another flipped card
+    if (prevFlippedIndex >= 0) {
       addAttempt()
       const isMatch = checkIsMatch(index, prevFlippedIndex)
 
@@ -60,15 +60,10 @@ export const CardList: React.FC<CardListProps> = ({ images }) => {
     }
   }
 
-
   function finishFlipBack() {
     timer.current && clearTimeout(timer.current)
     unFlipCards()
     setIsFlippingBack(false)
-  }
-  
-  function checkIsMatchable(index1: number, index2: number) {
-    return !cards[index1].isFlipped && index2 >= 0
   }
 
   function checkIsMatch(index1: number, index2: number) {
