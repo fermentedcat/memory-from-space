@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MemoryCard } from '../../models/memory-card'
 import styles from './Card.module.scss'
@@ -10,6 +10,8 @@ interface CardProps {
 
 export const Card: React.FC<CardProps> = ({ card, onFlip }) => {
   const { title, url, isFlipped, isMatched } = card
+  const [isBooped, setIsBooped] = useState<boolean>(false)
+
   const transition = {
     rotateY: {
       type: 'spring',
@@ -24,11 +26,32 @@ export const Card: React.FC<CardProps> = ({ card, onFlip }) => {
     }
   }
 
+  const boopAnimation = card.isMatched || card.isFlipped ? '0.6deg' : '2deg'
+
+  useEffect(() => {
+    if (!isBooped) {
+      return
+    }
+    const boopTimer: NodeJS.Timer = setTimeout(() => {
+      setIsBooped(false)
+    }, 150)
+
+    return () => clearTimeout(boopTimer)
+  }, [isBooped])
+
   return (
-    <button
+    <motion.button
       onClick={onFlip}
       className={styles.wrapper}
       aria-label='Flip card'
+      onMouseEnter={() => setIsBooped(true)}
+      initial={{ rotate: '0deg' }}
+      animate={{ rotate: isBooped ? boopAnimation : '0deg' }}
+      transition={{
+        type: 'spring',
+        damping: 10,
+        stiffness: 300,
+      }}
     >
       <motion.div 
         className={styles.front}
@@ -58,6 +81,6 @@ export const Card: React.FC<CardProps> = ({ card, onFlip }) => {
           <div className={styles.inner}>
           </div>
       </motion.div>
-    </button>
+    </motion.button>
   )
 }
