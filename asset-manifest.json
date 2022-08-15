@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/memory-from-space/static/css/main.3e107b48.css",
+    "main.js": "/memory-from-space/static/js/main.076bad14.js",
+    "index.html": "/memory-from-space/index.html",
+    "main.3e107b48.css.map": "/memory-from-space/static/css/main.3e107b48.css.map",
+    "main.076bad14.js.map": "/memory-from-space/static/js/main.076bad14.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e107b48.css",
+    "static/js/main.076bad14.js"
+  ]
+}
