@@ -1,5 +1,6 @@
 {
-  "name": "memory-ts",
+  "name": "memory-from-space",
+  "homepage": "https://fermentedcat.github.io/memory-from-space",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,6 +22,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,6 +49,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "gh-pages": "^4.0.0"
   }
 }
