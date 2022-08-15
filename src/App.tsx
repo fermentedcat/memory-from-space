@@ -22,7 +22,7 @@ function App() {
   function fetchImages() {
     axios.get<Image[]>(API_URL)
       .then(res => {
-        if (res.statusText !== 'OK') {
+        if (res.status !== 200) {
           throw new Error('Failed to fetch images!')
         }
         setImages(res.data)
